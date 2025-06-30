@@ -1,4 +1,8 @@
 from typing import List, Optional, Tuple, Dict, Any
+##### Additional code to validate that the input is a valid finite ring
+# from .ring_axioms import is_associative, has_additive_inverses, is_distributive
+# from .ring_table import validate_addition_table
+
 
 Element = Any  # Maybe make this stricter later idk (e.g. int, str)
 Table = List[List[Element]]
@@ -56,6 +60,28 @@ def is_division_ring(mul_table: Table, zero_index: int = 0) -> Tuple[bool, Optio
 def analyze_ring(mul_table: Table) -> Dict[str, Dict[str, Any]]:
     """Run all checks and return a structured result."""
     result = {}
+    
+    ####### Not implemented further due to time constraints
+    #### Replace function name with the line below if implemented
+    # def analyze_ring(add: Optional[Table], mul_table: Table) -> Dict[str, Dict[str, Any]]:
+    # ##### Additional code to validate that the input is a valid finite ring
+    # # --- Additive structure (if given)
+    # if add is not None:
+    #     try:
+    #         zero = validate_addition_table(add)
+    #     except Exception as e:
+    #         result["addition structure"] = {
+    #             "value": False,
+    #             "reason": str(e)
+    #         }
+    #         return result  # stop early if not even a valid commutative group
+
+    #     add_inv = has_additive_inverses(add, zero)
+    #     assoc_add = is_associative(add)
+    #     dist = is_distributive(add, mul_table)
+
+    # # --- Multiplicative structure
+    # assoc_mul = is_associative(mul_table)
 
     commutative, counter1 = is_commutative(mul_table)
     result["commutative"] = {

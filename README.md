@@ -1,29 +1,30 @@
-# 🔍 Finite Ring Analyzer
+# Finite Ring Analyzer
 
 A desktop app to test algebraic properties of finite rings, built with **Python** and **PyQt5**. Supports both built-in rings like **ℤ/nℤ** and fully custom rings via operation tables.
 
 
-## ✨ Features
+## Features
 
-- ✅ Analyze whether a finite ring is:
+- Analyze whether a finite ring is:
   - **Commutative**
   - **Has a multiplicative identity**
   - **An integral domain**
   - **A division ring**
-- 🔢 Supports both:
+- Supports both:
   - **ℤ/nℤ rings**: enter modulus and elements
   - **Custom rings**: define addition and multiplication tables manually
-- 🚀 Fast Input Mode: type or paste multiple ring definitions in batch format
-- 📦 Batch Mode: analyze multiple rings at once
-- 📊 Detailed results per batch including:
+- Fast Input Mode: type or paste multiple ring definitions in batch format
+- Batch Mode: analyze multiple rings at once
+- Detailed results per batch including:
   - True/False for each property
   - Counterexamples or explanations when a property fails
-- 🖼️ Visualize addition and multiplication tables
-- 💾 Export results to `.txt` or `.csv`
-- ✅ Single `.exe` version available (built with PyInstaller)
+- Visualize addition and multiplication tables
+- Export results to `.txt` or `.csv`
+- Hide output
+- Single `.exe` version available (built with PyInstaller)
 
 
-## 🧪 Input Formats
+## Input Formats
 
 ### ℤ/nℤ Tab
 
@@ -48,13 +49,13 @@ A desktop app to test algebraic properties of finite rings, built with **Python*
 - Similar to manual mode, but can input many before analyzing
 
 ### Custom Tab
+Note: *custom tab* assumes the input for the tables is finite ring.
 
 #### Manual Mode
-- Specify `n`
+- Specify `n`, where `n`x`n` is table size
 - Fill in **addition** and **multiplication** tables
 
 #### Fast Input Mode (supports batches!)
-
 - Example input:
 ```
 3
@@ -84,10 +85,10 @@ A desktop app to test algebraic properties of finite rings, built with **Python*
 - Similar to manual mode, but can input many before analyzing
 
 
-## 📤 Export Format
+## Export Format
 
 Exports include:
-- ✅/❌ for each ring property
+- True/False for each ring property
 - Counterexamples or notes, like:
   - `Zero divisors: (2, 3)`
   - `Missing inverse: 4`
@@ -98,23 +99,23 @@ Formats:
 - **.txt** — plain text
 
 
-## ▶️ Running the App
+## Running the App
 
-### 💻 With Python
+### With Python
 
 ```bash
 pip install -r requirements.txt
 python main.py
 ```
 
-### 📦 As Executable
+### As Executable
 
 If you're using the .exe build, simple launch:
 ```
 FiniteRingAnalyzer.exe
 ```
 
-### 🔧 Build Instructions
+### Build Instructions
 
 To make a standalone .exe (Windows):
 
@@ -133,7 +134,7 @@ This creates:
 - `build/ — temp build files`
 - `main.spec — config file (auto-generated)`
 
-### 📦 Requirements
+### Requirements
 
 Python 3.8 or higher. Install dependencies:
 ```bash
@@ -146,7 +147,7 @@ PyQt5==5.15.11
 PyQt5_sip==12.17.0
 ```
 
-### 🧠 Notes
+### Notes
 
 - Rings of size 1 (n = 1) are invalid
 - Elements must be in [0, n-1]
@@ -154,11 +155,11 @@ PyQt5_sip==12.17.0
 - Batch mode supports commas or spaces in input
 - Error dialogs help identify input mistakes
 
-### 📚 Educational Use
+### Educational Use
 
 This app was developed as part of a Modern Algebra project. It helps test and visualize algebraic properties of finite rings interactively and efficiently.
 
-### ✅ Status
+### Status
 
 All planned features implemented and tested:
 - Full PyQt5 GUI

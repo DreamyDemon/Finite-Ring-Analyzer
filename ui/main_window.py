@@ -155,7 +155,14 @@ class MainWindow(QWidget):
         tab = self.custom_tab
 
         if tab.fast_cb.isChecked():
-            return parse_fast_blocks(tab.fast_text.toPlainText(), custom=True)
+            parsed = parse_fast_blocks(tab.fast_text.toPlainText(), custom=True)
+            validated = []
+            for add, mul in parsed:
+                validate_addition_table(add)
+                validate_multiplication_table(mul)
+                validated.append((add, mul))
+
+            return validated
 
         elif tab.batch_cb.isChecked():
             results = []

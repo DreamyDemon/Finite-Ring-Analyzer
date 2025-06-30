@@ -14,20 +14,30 @@ def validate_custom_table(table: List[List[int]]) -> bool:
     valid = set(range(n))
     return all(x in valid for row in table for x in row)
 
-def validate_addition_table(add_table: List[List[int]], zero_index: int = 0) -> None:
-    """Raise if not a valid commutative group table with identity at zero_index."""
+def validate_addition_table(add_table: List[List[int]]) -> int:
+    """
+    Validate that the addition table defines a commutative group with some identity element.
+    Automatically detects and returns the index of the additive identity.
+    Raises ValueError if the structure is invalid.
+    """
     if not validate_custom_table(add_table):
         raise ValueError("Addition table must be square with entries 0..n-1.")
+
     n = len(add_table)
-    # Commutativity
+
+    # Check commutativity: a + b == b + a
     for i in range(n):
         for j in range(n):
             if add_table[i][j] != add_table[j][i]:
-                raise ValueError(f"Addition not commutative at ({i},{j}).")
-    # Identity at zero_index
-    for i in range(n):
-        if add_table[zero_index][i] != i or add_table[i][zero_index] != i:
-            raise ValueError(f"Addition identity must be element {zero_index} (row/col).")
+                raise ValueError(f"Addition not commutative at (row {i+1}, column {j+1})")
+
+    # Try to find the identity element (i.e., row/col e such that a + e = a and e + a = a)
+    for e in range(n):
+        if all(add_table[e][i] == i and add_table[i][e] == i for i in range(n)):
+            return e  # success — return index of identity
+
+    raise ValueError("No valid additive identity found\n(no element that behaves like e + a = a + e = a).\nThis app requires a valid addition table with an identity element.")
+
 
 def validate_multiplication_table(mul_table: List[List[int]]) -> None:
     """Raise if not a valid multiplication table (shape + range)."""
@@ -91,7 +101,7 @@ def parse_fast_blocks(
                 for r, row in enumerate(rows, start=1):
                     nums = [int(x) for x in re.split(r"[,\s]+", row) if x]
                     if len(nums) != n:
-                        raise ValueError(f"Batch {idx} {kind} row {r}: need {n}, got {len(nums)}")
+                        raise ValueError(f"Batch {idx} {kind} row {r}: need {n} elements, got {len(nums)} elements")
                     tbl.append(nums)
                 return tbl
             out.append((parse_tbl(add_rows, "Addition"), parse_tbl(mul_rows, "Multiplication")))
